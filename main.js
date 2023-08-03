@@ -9,6 +9,13 @@ const BALLOON_COLOR = [
   "radial-gradient(circle, rgba(203,254,158,1) 0%, rgba(159,255,81,0.9038209033613446) 44%, rgba(126,255,46,1) 100%)",
 ];
 const BALLOON_RADIUS = ["10%", "20%", "30%", "40%", "50%"];
+const BALLOON_ANIMATION = [
+  "balloons 2s ease-in-out infinite",
+  "balloons 3s ease-in-out infinite",
+  "balloons 4s ease-in-out infinite",
+  "balloons 5s ease-in-out infinite",
+  "balloons 6s ease-in-out infinite",
+];
 const BALLOON_SIZE = 130;
 const BALLOON_COUNT = 50;
 
@@ -42,14 +49,15 @@ function addItem(className, count) {
   const y2 = fieldRect.height - BALLOON_SIZE;
 
   for (let i = 0; i < count; i++) {
-    const randomColor = Math.floor(Math.random() * (6 - 1) + 1);
-    const randomRadius = Math.floor(Math.random() * (5 - 1) + 1);
+    const random1 = Math.floor(Math.random() * (6 - 1) + 1);
+    const random2 = Math.floor(Math.random() * (5 - 1) + 1);
 
     const item = document.createElement("div");
     item.setAttribute("class", className);
     item.style.position = "absolute";
-    item.style.background = BALLOON_COLOR[randomColor];
-    item.style.borderRadius = BALLOON_RADIUS[randomRadius];
+    item.style.background = BALLOON_COLOR[random1];
+    item.style.borderRadius = BALLOON_RADIUS[random2];
+    item.style.animation = BALLOON_ANIMATION[random2];
 
     const x = randomNumber(x1, x2);
     const y = randomNumber(y1, y2);
