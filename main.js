@@ -2,11 +2,11 @@
 
 const BALLOON_COLOR = [
   "rgba(242, 107, 66, 0.9)",
-  "rgba(61, 137, 253, 0.9)",
-  "rgba(204, 86, 255, 0.9)",
-  "rgba(194, 244, 67, 0.9)",
-  "rgba(254, 224, 58, 0.9)",
-  "rgba(242, 45, 81, 0.9)",
+  "radial-gradient(circle, rgba(254,231,158,1) 0%, rgba(255,213,111,0.9038209033613446) 44%, rgba(255,199,90,1) 100%)",
+  "radial-gradient(circle, rgba(254,158,199,1) 0%, rgba(255,81,159,0.9038209033613446) 44%, rgba(255,46,140,1) 100%)",
+  "radial-gradient(circle, rgba(111,202,255,1) 0%, rgba(81,171,255,0.9038209033613446) 44%, rgba(90,150,255,1) 100%)",
+  "radial-gradient(circle, rgba(234,158,254,1) 0%, rgba(238,111,255,0.9038209033613446) 44%, rgba(210,90,255,1) 100%)",
+  "radial-gradient(circle, rgba(203,254,158,1) 0%, rgba(159,255,81,0.9038209033613446) 44%, rgba(126,255,46,1) 100%)",
 ];
 const BALLOON_RADIUS = ["10%", "20%", "30%", "40%", "50%"];
 const BALLOON_SIZE = 130;
@@ -48,7 +48,7 @@ function addItem(className, count) {
     const item = document.createElement("div");
     item.setAttribute("class", className);
     item.style.position = "absolute";
-    item.style.backgroundColor = BALLOON_COLOR[randomColor];
+    item.style.background = BALLOON_COLOR[randomColor];
     item.style.borderRadius = BALLOON_RADIUS[randomRadius];
 
     const x = randomNumber(x1, x2);
