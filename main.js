@@ -2,15 +2,26 @@
 
 const BALLOON_W_SIZE = 100;
 const BALLOON_H_SIZE = 120;
+const BALLOON_COUNT = 70;
 
 const field = document.querySelector(".balloon_field");
 const fieldRect = field.getBoundingClientRect();
+
+field.addEventListener("click", onItemClick);
 
 // 풍선을 추가한 뒤 field에 추가
 function init() {
   // field의 rect을 출력해보자
   console.log(fieldRect);
-  addItem("balloon", 50, "./images/balloon");
+  addItem("balloon", BALLOON_COUNT, "./images/balloon");
+}
+
+// balloon click
+function onItemClick(event) {
+  const target = event.target;
+  if (target.matches(".balloon")) {
+    target.remove();
+  }
 }
 
 function addItem(className, count, imgPath) {

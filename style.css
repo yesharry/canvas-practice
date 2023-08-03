@@ -26,6 +26,11 @@ body {
 
 .balloon {
   width: 100px;
+  cursor: pointer;
+}
+
+.balloon:hover {
+  transform: scale(1.1);
 }
 
 .house_field {
