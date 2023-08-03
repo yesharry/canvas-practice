@@ -1,19 +1,28 @@
 "use strict";
 
-const BALLOON_W_SIZE = 100;
-const BALLOON_H_SIZE = 120;
-const BALLOON_COUNT = 70;
+const BALLOON_SIZE = 130;
+const BALLOON_COUNT = 30;
+
+const BALLOON_COLOR = [
+  "rgba(242, 107, 66, 0.9)",
+  "rgba(61, 137, 253, 0.9)",
+  "rgba(204, 86, 255, 0.9)",
+  "rgba(194, 244, 67, 0.9)",
+  "rgba(254, 224, 58, 0.9)",
+  "rgba(242, 45, 81, 0.9)",
+];
 
 const field = document.querySelector(".balloon_field");
 const fieldRect = field.getBoundingClientRect();
 
+const house = document.querySelector(".house");
+
 field.addEventListener("click", onItemClick);
+house.addEventListener("click", onHouseClick);
 
 // 풍선을 추가한 뒤 field에 추가
 function init() {
-  // field의 rect을 출력해보자
-  console.log(fieldRect);
-  addItem("balloon", BALLOON_COUNT, "./images/balloon");
+  addItem("balloon", BALLOON_COUNT);
 }
 
 // balloon click
@@ -24,26 +33,26 @@ function onItemClick(event) {
   }
 }
 
-function addItem(className, count, imgPath) {
+function onHouseClick() {
+  addItem("balloon", 1);
+}
+
+function addItem(className, count) {
   const x1 = 0;
   const y1 = 0;
-  const x2 = fieldRect.width - BALLOON_W_SIZE;
-  const y2 = fieldRect.height - BALLOON_H_SIZE;
+  const x2 = fieldRect.width - BALLOON_SIZE;
+  const y2 = fieldRect.height - BALLOON_SIZE;
 
   for (let i = 0; i < count; i++) {
-    const item = document.createElement("img");
     const random = Math.floor(Math.random() * (6 - 1) + 1);
-    // 풍선 색상 랜덤 주기 위한 변수
+    const item = document.createElement("div");
 
     item.setAttribute("class", className);
-    item.setAttribute("src", `${imgPath + random}.png`);
     item.style.position = "absolute";
-    // count 개수 만큼 item 추가하기
+    item.style.backgroundColor = BALLOON_COLOR[random];
 
     const x = randomNumber(x1, x2);
-    // x의 위치는 x1 ~ x2까지 아무 랜덤한 숫자를 받아오기
     const y = randomNumber(y1, y2);
-    // y도 마찬가지로 y1 ~ y2까지 랜덤한 숫자 받아오기
     item.style.top = `${y}px`;
     item.style.left = `${x}px`;
     field.appendChild(item);
