@@ -30,7 +30,7 @@ body {
   cursor: pointer;
 }
 
-.balloon:before {
+.balloon::before {
   content: "▲";
   font-size: 16px;
   color: rgba(255, 255, 255, 0.468);
@@ -50,6 +50,63 @@ body {
   }
 }
 
+.heart_field {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 60%;
+  animation: beat 2s ease-in-out infinite;
+  transform: rotate(70deg);
+}
+
+@keyframes beat {
+  0% {
+    transform: scale(1) rotate(70deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(70deg);
+  }
+}
+
+.heart {
+  width: 150px;
+  height: 150px;
+  background: #ea2027;
+  border-radius: 7px;
+  position: relative;
+
+  &::before {
+    content: "";
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #ea2027;
+    position: absolute;
+    left: -50%;
+  }
+
+  &::after {
+    content: "";
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #ea2027;
+    position: absolute;
+    top: -50%;
+    left: 0%;
+  }
+}
+
+.sale {
+  color: white;
+  font-size: 50px;
+  font-weight: 600;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: rotate(-45deg);
+}
+
 .house_field {
   width: 100%;
   height: 50%;
@@ -60,7 +117,7 @@ body {
 }
 
 .house {
-  width: 350px;
+  width: 20%;
   cursor: pointer;
 
   transform-origin: center bottom;

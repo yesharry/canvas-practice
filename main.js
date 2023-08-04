@@ -28,7 +28,6 @@ house.addEventListener("click", onHouseClick);
 
 function init() {
   addItem("balloon", BALLOON_COUNT);
-  addItem("sale", 1);
 }
 
 function onItemClick(event) {
