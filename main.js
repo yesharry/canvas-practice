@@ -15,8 +15,8 @@ const BALLOON_ANIMATION = [
   "balloons 5s ease-in-out infinite",
   "balloons 6s ease-in-out infinite",
 ];
-const BALLOON_SIZE = 130;
-const BALLOON_COUNT = 70;
+const BALLOON_SIZE = 100;
+const BALLOON_COUNT = 100;
 
 const field = document.querySelector(".balloon_field");
 const fieldRect = field.getBoundingClientRect();
@@ -29,6 +29,7 @@ const heart = document.querySelector(".heart");
 heart.addEventListener("click", onItemClick);
 
 function init() {
+  console.log(fieldRect);
   addItem("balloon", BALLOON_COUNT);
 }
 
@@ -56,7 +57,7 @@ function addItem(className, count) {
 
     const item = document.createElement("div");
     item.setAttribute("class", className);
-    item.style.position = "absolute";
+    // item.style.position = "absolute";
     item.style.background = BALLOON_COLOR[random];
     item.style.borderRadius = BALLOON_RADIUS[random];
     item.style.animation = BALLOON_ANIMATION[random];
