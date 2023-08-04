@@ -17,7 +17,7 @@ const BALLOON_ANIMATION = [
   "balloons 6s ease-in-out infinite",
 ];
 const BALLOON_SIZE = 130;
-const BALLOON_COUNT = 50;
+const BALLOON_COUNT = 100;
 
 const field = document.querySelector(".balloon_field");
 const fieldRect = field.getBoundingClientRect();
