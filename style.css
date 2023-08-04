@@ -74,6 +74,7 @@ body {
   background: #ea2027;
   border-radius: 7px;
   position: relative;
+  cursor: pointer;
 
   &::before {
     content: "";
@@ -105,6 +106,7 @@ body {
   top: 0%;
   left: 0%;
   transform: rotate(-45deg);
+  z-index: 10;
 }
 
 .house_field {

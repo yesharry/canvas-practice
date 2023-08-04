@@ -25,6 +25,9 @@ field.addEventListener("click", onItemClick);
 const house = document.querySelector(".house");
 house.addEventListener("click", onHouseClick);
 
+const heart = document.querySelector(".heart");
+heart.addEventListener("click", onItemClick);
+
 function init() {
   addItem("balloon", BALLOON_COUNT);
 }
@@ -32,6 +35,8 @@ function init() {
 function onItemClick(event) {
   const target = event.target;
   if (target.matches(".balloon")) {
+    target.remove();
+  } else if (target.matches(".heart")) {
     target.remove();
   }
 }
