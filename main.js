@@ -57,7 +57,6 @@ function addItem(className, count) {
 
     const item = document.createElement("div");
     item.setAttribute("class", className);
-    // item.style.position = "absolute";
     item.style.background = BALLOON_COLOR[random];
     item.style.borderRadius = BALLOON_RADIUS[random];
     item.style.animation = BALLOON_ANIMATION[random];
