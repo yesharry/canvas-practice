@@ -60,15 +60,6 @@ body {
   }
 }
 
-@keyframes rotate {
-  0% {
-    transform: rotate(-7deg);
-  }
-  50% {
-    transform: rotate(7deg);
-  }
-}
-
 .flag {
   width: 250px;
   height: 60px;
@@ -77,6 +68,15 @@ body {
   left: 200px;
   transform: rotate(-7deg);
   animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(-7deg);
+  }
+  50% {
+    transform: rotate(7deg);
+  }
 }
 
 .heart_field {
