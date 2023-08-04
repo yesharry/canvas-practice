@@ -1,7 +1,6 @@
 "use strict";
 
 const BALLOON_COLOR = [
-  "rgba(242, 107, 66, 0.9)",
   "radial-gradient(circle, rgba(254,231,158,1) 0%, rgba(255,213,111,0.9038209033613446) 44%, rgba(255,199,90,1) 100%)",
   "radial-gradient(circle, rgba(254,158,199,1) 0%, rgba(255,81,159,0.9038209033613446) 44%, rgba(255,46,140,1) 100%)",
   "radial-gradient(circle, rgba(111,202,255,1) 0%, rgba(81,171,255,0.9038209033613446) 44%, rgba(90,150,255,1) 100%)",
@@ -48,15 +47,14 @@ function addItem(className, count) {
   const y2 = fieldRect.height - BALLOON_SIZE;
 
   for (let i = 0; i < count; i++) {
-    const random1 = Math.floor(Math.random() * (6 - 1) + 1);
-    const random2 = Math.floor(Math.random() * (5 - 1) + 1);
+    const random = Math.floor(Math.random() * 5);
 
     const item = document.createElement("div");
     item.setAttribute("class", className);
     item.style.position = "absolute";
-    item.style.background = BALLOON_COLOR[random1];
-    item.style.borderRadius = BALLOON_RADIUS[random2];
-    item.style.animation = BALLOON_ANIMATION[random2];
+    item.style.background = BALLOON_COLOR[random];
+    item.style.borderRadius = BALLOON_RADIUS[random];
+    item.style.animation = BALLOON_ANIMATION[random];
 
     const x = randomNumber(x1, x2);
     const y = randomNumber(y1, y2);
