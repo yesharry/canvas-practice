@@ -1,77 +1,88 @@
-"use strict";
+const canvas = document.querySelector("canvas");
+const context = canvas.getContext("2d");
+// 2d 그래픽 context 가져오기
 
-const BALLOON_COLOR = [
-  "radial-gradient(circle, rgba(254,231,158,1) 0%, rgba(255,213,111,0.9038209033613446) 44%, rgba(255,199,90,1) 100%)",
-  "radial-gradient(circle, rgba(254,158,199,1) 0%, rgba(255,81,159,0.9038209033613446) 44%, rgba(255,46,140,1) 100%)",
-  "radial-gradient(circle, rgba(111,202,255,1) 0%, rgba(81,171,255,0.9038209033613446) 44%, rgba(90,150,255,1) 100%)",
-  "radial-gradient(circle, rgba(234,158,254,1) 0%, rgba(238,111,255,0.9038209033613446) 44%, rgba(210,90,255,1) 100%)",
-  "radial-gradient(circle, rgba(203,254,158,1) 0%, rgba(159,255,81,0.9038209033613446) 44%, rgba(126,255,46,1) 100%)",
+const houseImg = new Image(); // 이미지 객체 생성
+houseImg.src = "house.png"; // 이미지 파일 경로
+houseImg.onload = () => {
+  animate();
+};
+// 집 이미지가 로딩되면 애니메이션 시작!
+
+const balloons = [];
+const balloonColors = [
+  "#FF3933",
+  "#FFA833",
+  "#FFD733",
+  "#29AF4F",
+  "#147BFF",
+  "#C614FF",
 ];
-const BALLOON_RADIUS = ["10%", "20%", "30%", "40%", "50%"];
-const BALLOON_ANIMATION = [
-  "balloons 2s ease-in-out infinite",
-  "balloons 3s ease-in-out infinite",
-  "balloons 4s ease-in-out infinite",
-  "balloons 5s ease-in-out infinite",
-  "balloons 6s ease-in-out infinite",
-];
-const BALLOON_SIZE = 100;
-const BALLOON_COUNT = 100;
 
-const field = document.querySelector(".balloon_field");
-const fieldRect = field.getBoundingClientRect();
-field.addEventListener("click", onItemClick);
+class Balloon {
+  // 풍선의 속성과 메서드를 정의한 클래스
+  constructor(x, y) {
+    // 풍선의 초기 속성 설정
+    this.x = x; // 풍선이 떠다닐 x축
+    this.y = y; // 풍선이 떠다닐 y축
+    this.radius = Math.random() * 50 + 10; // 랜덤 크기
+    this.color =
+      balloonColors[Math.floor(Math.random() * balloonColors.length)];
+    // 랜덤 색상
+    this.angle = Math.random() * Math.PI * 2; // 각도?
+    this.amplitude = Math.random() * 20 + 10; // 파동(출렁이는 애니메이션)
+    this.frequency = Math.random() * 0.02 + 0.01; // 빈도
+  }
 
-const house = document.querySelector(".house");
-house.addEventListener("click", onHouseClick);
+  update() {
+    this.angle += this.frequency;
+    this.y = canvas.height / 5 + Math.sin(this.angle) * this.amplitude;
+    this.x += Math.cos(this.angle) * 0.5;
 
-const heart = document.querySelector(".heart");
-heart.addEventListener("click", onItemClick);
+    this.draw();
+  } // 풍선의 위치와 draw 업데이트
 
-function init() {
-  console.log(fieldRect);
-  addItem("balloon", BALLOON_COUNT);
-}
+  draw() {
+    // 풍선과 집을 연결하는 끈과 풍선 그리기
+    context.beginPath(); // 경로 열기
+    context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    context.fillStyle = this.color; // 풍선 색상
+    context.fill();
+    context.closePath(); // 경로 닫기
 
-function onItemClick(event) {
-  const target = event.target;
-  if (target.matches(".balloon")) {
-    target.remove();
-  } else if (target.matches(".heart")) {
-    target.remove();
+    context.beginPath();
+    context.moveTo(this.x, this.y);
+    context.lineTo(canvas.width / 2, canvas.height - 50);
+    context.strokeStyle = this.color; // 연결된 끈 색상
+    context.stroke();
+    context.closePath(); // 경로 닫기
   }
 }
 
-function onHouseClick() {
-  addItem("balloon", 1);
-}
-
-function addItem(className, count) {
-  const x1 = 0;
-  const y1 = 0;
-  const x2 = fieldRect.width - BALLOON_SIZE;
-  const y2 = fieldRect.height - BALLOON_SIZE;
-
-  for (let i = 0; i < count; i++) {
-    const random = Math.floor(Math.random() * 5);
-
-    const item = document.createElement("div");
-    item.setAttribute("class", className);
-    item.style.background = BALLOON_COLOR[random];
-    item.style.borderRadius = BALLOON_RADIUS[random];
-    item.style.animation = BALLOON_ANIMATION[random];
-
-    const x = randomNumber(x1, x2);
-    const y = randomNumber(y1, y2);
-    item.style.top = `${y}px`;
-    item.style.left = `${x}px`;
-
-    field.appendChild(item);
+function initBalloons() {
+  for (let i = 0; i < 50; i++) {
+    const x = Math.random() * canvas.width;
+    const y = canvas.height / 2 + Math.random() * 100;
+    balloons.push(new Balloon(x, y));
   }
 }
 
-function randomNumber(min, max) {
-  return Math.random() * (max - min) + min;
+function animate() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  context.drawImage(
+    houseImg,
+    canvas.width / 2 - 85,
+    canvas.height - 200,
+    200,
+    200
+  );
+
+  for (let i = 0; i < balloons.length; i++) {
+    balloons[i].update();
+  }
+
+  requestAnimationFrame(animate); // 프레임을 요청하여 애니메이트 지속
 }
 
-init();
+initBalloons();
