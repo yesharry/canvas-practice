@@ -51,11 +51,11 @@ class Balloon {
     context.closePath(); // 경로 닫기
 
     context.beginPath();
-    context.moveTo(this.x, this.y);
-    context.lineTo(canvas.width / 2, canvas.height - 50);
+    context.moveTo(this.x, this.y); // 시작점 -> 풍선 위치
+    context.lineTo(canvas.width / 2, canvas.height - 50); // 풍선 위치부터 집까지 연결
     context.strokeStyle = this.color; // 연결된 끈 색상
     context.stroke();
-    context.closePath(); // 경로 닫기
+    context.closePath();
   }
 }
 
